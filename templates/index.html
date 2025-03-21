@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lenguajes y Automatas II</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #1e2a47;
+            font-family: 'Arial', sans-serif;
+            color: #e1e8f0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #4cb8ff;
+        }
+        form {
+            margin: 20px auto;
+            width: 350px;
+            border-radius: 15px;
+            background-color: #2d3b62;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            color: #e1e8f0;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        input, select {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px 0;
+            border-radius: 8px;
+            border: 1px solid #4cb8ff;
+            background-color: #4c5b77;
+            color: #e1e8f0;
+            font-size: 16px;
+            outline: none;
+        }
+        input:focus, select:focus {
+            border-color: #6fa3e2;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4cb8ff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #3787c0;
+        }
+        .caja {
+            margin: 20px auto;
+            width: 70%;
+            border: 2px solid #4cb8ff;
+            border-radius: 15px;
+            padding: 20px;
+            background-color: #2d3b62;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .caja ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Crea dos columnas */
+            gap: 10px; /* Espacio entre los elementos */
+        }
+        .caja li {
+            background-color: #3b4d7b;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            color: #e1e8f0;
+            font-size: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DFS Solver</h1>
+    <form action="/solve" method="post">
+        <label for="estado_inicial">Estado Inicial</label>
+        <input type="text" id="estado_inicial" name="estado_inicial" placeholder="Ejemplo: 4,2,3,1" required>
+    
+        <label for="solucion">Solución</label>
+        <input type="text" id="solucion" name="solucion" placeholder="Ejemplo: 1,2,3,4" required>
+    
+        <button type="submit">Resolver</button>
+    </form>
+
+    {% if resultados %}
+    <div class="caja">
+        <h2>Resultados:</h2>
+        
+        <!-- Resultados de DFS -->
+        {% if resultados['DFS'] %}
+        <h3>DFS:</h3>
+        <ul>
+            {% for paso in resultados['DFS'] %}
+                <li>{{ paso }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No se encontró solución con DFS.</p>
+        {% endif %}
+
+        <!-- Resultados de BFS -->
+        {% if resultados['BFS'] %}
+        <h3>BFS:</h3>
+        <ul>
+            {% for paso in resultados['BFS'] %}
+                <li>{{ paso }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No se encontró solución con BFS.</p>
+        {% endif %}
+
+        <!-- Resultados de LIFO -->
+        {% if resultados['LIFO'] %}
+        <h3>LIFO:</h3>
+        <ul>
+            {% for paso in resultados['LIFO'] %}
+                <li>{{ paso }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No se encontró solución con LIFO.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+</body>
+</html>
